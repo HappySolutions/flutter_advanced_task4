@@ -17,20 +17,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Media Player'),
+          child: Text(''),
         ),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       Navigator.push(context,
-        //           MaterialPageRoute(builder: (_) => const PlaylistPage()));
-        //     },
-        //     icon: const Icon(Icons.playlist_play),
-        //   ),
-        // ],
       ),
-      body: SoundPlayerWidget(
-        audioFile: widget.audioFile,
+      body: SafeArea(
+        child: SoundPlayerWidget(
+          audioFile: widget.audioFile,
+        ),
       ),
     );
   }

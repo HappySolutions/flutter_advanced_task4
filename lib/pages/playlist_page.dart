@@ -23,28 +23,44 @@ class _PlaylistPageState extends State<PlaylistPage> {
     playlistEx = Playlist(
       audios: [
         Audio(
-          "assets/sampl.mp3",
+          "assets/1.mp3",
           metas: Metas(
-              title: 'First Song',
-              artist: 'Artist 1',
-              image: const MetasImage.network(
-                  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80')),
+            title: 'الفجر',
+            artist: 'عبدالمجيد السريح',
+            image: const MetasImage.asset('assets/1.jpeg'),
+          ),
         ),
         Audio(
-          "assets/sampl1.mp3",
+          "assets/2.mp3",
           metas: Metas(
-              title: 'Second Song',
-              artist: 'Artist 2',
-              image: const MetasImage.network(
-                  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80')),
+            title: 'الظهر',
+            artist: 'ناصر القطامي',
+            image: const MetasImage.asset('assets/2.jpeg'),
+          ),
         ),
         Audio(
-          "assets/sampl2.mp3",
+          "assets/3.mp3",
           metas: Metas(
-              title: 'Third Song',
-              artist: 'Artist 3',
-              image: const MetasImage.network(
-                  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80')),
+            title: 'العصر',
+            artist: 'وديع اليمني',
+            image: const MetasImage.asset('assets/3.jpeg'),
+          ),
+        ),
+        Audio(
+          "assets/4.mp3",
+          metas: Metas(
+            title: 'المغرب',
+            artist: 'مولانا كورتيش',
+            image: const MetasImage.asset('assets/4.jpeg'),
+          ),
+        ),
+        Audio(
+          "assets/5.mp3",
+          metas: Metas(
+            title: 'العشاء',
+            artist: 'اسلام صبحي',
+            image: const MetasImage.asset('assets/5.jpeg'),
+          ),
         ),
       ],
     );
@@ -58,7 +74,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
       backgroundColor: const Color.fromARGB(255, 237, 237, 237),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 237, 237, 237),
-        title: const Center(child: Text('Songs PlayList')),
+        title: const Center(child: Text('قائمة المؤذن')),
       ),
       body: playlistEx!.audios.isEmpty
           ? const CircularProgressIndicator()
@@ -75,7 +91,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     }).toList(),
                     carouselController: _controller,
                     options: CarouselOptions(
-                        height: 270,
+                        height: 340,
                         autoPlay: true,
                         enlargeCenterPage: true,
                         aspectRatio: 2.0,

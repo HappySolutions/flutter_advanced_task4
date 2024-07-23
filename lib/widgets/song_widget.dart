@@ -28,7 +28,7 @@ class _SongWidgetState extends State<SongWidget> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Image.network(widget.audio.metas.image?.path ?? ''),
+            child: Image.asset(widget.audio.metas.image?.path ?? ''),
           ),
           const SizedBox(
             height: 10,
