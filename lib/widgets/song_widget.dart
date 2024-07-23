@@ -12,13 +12,6 @@ class SongWidget extends StatefulWidget {
 }
 
 class _SongWidgetState extends State<SongWidget> {
-  final assetsAudioPlayer = AssetsAudioPlayer();
-  @override
-  void initState() {
-    assetsAudioPlayer.open(widget.audio, autoStart: false);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -36,18 +29,7 @@ class _SongWidgetState extends State<SongWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(widget.audio.metas.artist ?? 'No Artist'),
-              StreamBuilder(
-                  stream: assetsAudioPlayer.realtimePlayingInfos,
-                  builder: (ctx, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (snapshot.data == null) {
-                      return const SizedBox.shrink();
-                    }
-                    return Text(widget.audio.metas.title ?? 'No Title');
-                  }),
+              Text(widget.audio.metas.artist ?? 'لا إسم'),
             ],
           ),
         ],
@@ -61,11 +43,5 @@ class _SongWidgetState extends State<SongWidget> {
                     )));
       },
     );
-  }
-
-  String convertSeconds(int seconds) {
-    String minutes = (seconds ~/ 60).toString();
-    String secondsStr = (seconds % 60).toString();
-    return '${minutes.padLeft(2, '0')}:${secondsStr.padLeft(2, '0')}';
   }
 }

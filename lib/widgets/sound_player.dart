@@ -34,7 +34,7 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
           volumeEx, //Usecase>>> only define if you want each song starts with the initial volume value even if you changed it during the prev song
       widget.audioFile,
       autoStart: false,
-      loopMode: LoopMode.playlist,
+      loopMode: LoopMode.single,
     );
     assetsAudioPlayer.playSpeed.listen((event) {
       playSpeedEx = event;
@@ -46,12 +46,6 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
     assetsAudioPlayer.currentPosition.listen((event) {
       valueEx = event.inSeconds;
     });
-  }
-
-  void changePlaySpeed(Set<double> values) {
-    playSpeedEx = values.first.toDouble();
-    assetsAudioPlayer.setPlaySpeed(playSpeedEx);
-    setState(() {});
   }
 
   void changeVolume(Set<double> values) {
@@ -74,53 +68,68 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
                 }
                 return Column(
                   children: [
-                    NeuBox(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
-                                child: Image.asset(assetsAudioPlayer
-                                        .getCurrentAudioImage?.path ??
-                                    ''),
-                              ),
-                              NeuBox(
-                                child: getBtnWidget,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.arrow_back),
+                        ),
+                        Text(
+                          assetsAudioPlayer.getCurrentAudioArtist == ''
+                              ? 'من فضلك قم بالتشغيل'
+                              : assetsAudioPlayer.getCurrentAudioArtist,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NeuBox(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  assetsAudioPlayer.getCurrentAudioTitle == ''
-                                      ? 'من فضلك قم بالتشغيل'
-                                      : assetsAudioPlayer.getCurrentAudioTitle,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child: Image.asset(assetsAudioPlayer
+                                          .getCurrentAudioImage?.path ??
+                                      ''),
                                 ),
-                                Text(
-                                  assetsAudioPlayer.getCurrentAudioArtist == ''
-                                      ? 'من فضلك قم بالتشغيل'
-                                      : assetsAudioPlayer.getCurrentAudioArtist,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
+                                NeuBox(
+                                  child: getBtnWidget,
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 15),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(15.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //     children: [
+
+                            //       Text(
+                            //         assetsAudioPlayer.getCurrentAudioArtist == ''
+                            //             ? 'من فضلك قم بالتشغيل'
+                            //             : assetsAudioPlayer.getCurrentAudioArtist,
+                            //         style: const TextStyle(
+                            //             fontWeight: FontWeight.w600,
+                            //             fontSize: 20),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 100),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Column(
@@ -174,9 +183,6 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
                         backgroundColor: WidgetStateProperty.all<Color>(
                           const Color(0x00000000),
                         ),
-                        iconColor: WidgetStateProperty.all<Color>(
-                          const Color(0xFF4CAF50),
-                        ),
                       ),
                       onSelectionChanged: (values) {
                         changeVolume(values);
@@ -196,38 +202,6 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
                         ),
                       ],
                       selected: {volumeEx},
-                    ),
-                    SegmentedButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all<Color>(
-                          const Color(0x00000000),
-                        ),
-                        iconColor: WidgetStateProperty.all<Color>(
-                          const Color(0xFF4CAF50),
-                        ),
-                      ),
-                      onSelectionChanged: (values) {
-                        changePlaySpeed(values);
-                      },
-                      segments: const [
-                        ButtonSegment(
-                          value: 1.0,
-                          icon: Text('1X'),
-                        ),
-                        ButtonSegment(
-                          value: 4.0,
-                          icon: Text('2X'),
-                        ),
-                        ButtonSegment(
-                          value: 8.0,
-                          icon: Text('3X'),
-                        ),
-                        ButtonSegment(
-                          value: 16.0,
-                          icon: Text('4X'),
-                        ),
-                      ],
-                      selected: {playSpeedEx},
                     ),
                   ],
                 );

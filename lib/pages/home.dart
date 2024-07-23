@@ -15,11 +15,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(''),
-        ),
-      ),
       body: SafeArea(
         child: SoundPlayerWidget(
           audioFile: widget.audioFile,
