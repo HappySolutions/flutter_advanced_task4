@@ -141,22 +141,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     ],
                   ),
                 ),
-              ]),
-
-              // CarouselSlider(
-              //   options: CarouselOptions(
-              //     clipBehavior: Clip.none,
-              //     height: 260,
-              //     autoPlay: true,
-              //   ),
-              //   items: playlistEx!.audios.map((i) {
-              //     return Builder(
-              //       builder: (BuildContext context) {
-              //         return SongWidget(audio: i);
-              //       },
-              //     );
-              //   }).toList(),
-              // ),
+              ],),
             ),
     );
   }
